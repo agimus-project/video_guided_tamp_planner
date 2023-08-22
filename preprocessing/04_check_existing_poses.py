@@ -2,11 +2,8 @@ from guided_tamp_benchmark.models.utils import get_models_data_directory
 from preprocessing.preproc_utils import (
     get_task_class,
     get_robot,
-    get_trans_quat_hpp,
-    sample_robot_base_pose,
     is_robot_base_valid,
 )
-from guided_tamp_benchmark.tasks.collisions import Collision
 from tamp_guided_by_video.planners.multi_contact_planner import MultiContactPlanner
 import pathlib
 import numpy as np

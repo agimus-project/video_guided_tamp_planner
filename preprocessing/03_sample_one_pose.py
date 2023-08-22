@@ -2,7 +2,6 @@ from preprocessing.preproc_utils import (
     get_task_class,
     get_robot,
     is_robot_base_valid,
-    get_trans_quat_hpp,
     sample_robot_base_pose
 )
 from tamp_guided_by_video.planners.multi_contact_planner import MultiContactPlanner
@@ -12,7 +11,6 @@ import pinocchio as pin
 from guided_tamp_benchmark.models.utils import get_models_data_directory
 from tamp_guided_by_video.utils.demo_processing import ensure_normalized
 from tamp_guided_by_video.utils.corba import CorbaServer
-import pickle
 import numpy as np
 import random
 
@@ -37,7 +35,8 @@ def sample_robot_pose(task, seed):
 if __name__ == "__main__":
     '''
     
-    for run in {1..100}; do python preprocessing/03_sample_one_pose.py -task_name shelf -task_id 0 -robot ur5 -pose_id 0 --verbose; done
+    for run in {1..100}; do python preprocessing/03_sample_one_pose.py \
+    -task_name shelf -task_id 2 -robot panda -pose_id 1 --verbose; done
 
     '''
     parser = argparse.ArgumentParser()
@@ -67,7 +66,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     corba_server = CorbaServer(models_package=get_models_data_directory())
-    folder = pathlib.Path(__file__).parent.joinpath(f"data")
+    folder = pathlib.Path(__file__).parent.joinpath("data")
     guide_path = folder.joinpath(f"{args.task_name}_{args.robot}"
                                  f"_{args.task_id}_{args.pose_id}.pkl")
 

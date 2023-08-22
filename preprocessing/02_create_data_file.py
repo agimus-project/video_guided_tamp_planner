@@ -1,8 +1,6 @@
 from guided_tamp_benchmark.tasks.demonstration import Demonstration
 import matplotlib.pyplot as plt
 import numpy as np
-import pickle
-import pathlib
 import argparse
 from preprocessing.preproc_utils import (
     get_obj_poses_from_file,

@@ -1,6 +1,4 @@
 import argparse
-import pickle
-import numpy as np
 import dill
 from utils import get_res_file
 

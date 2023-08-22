@@ -3,7 +3,6 @@ from guided_tamp_benchmark.models.utils import get_models_data_directory
 from tamp_guided_by_video.utils.utils import get_task, get_robot
 import time
 from robomeshcat import Robot
-import argparse
 import pathlib
 import pickle
 

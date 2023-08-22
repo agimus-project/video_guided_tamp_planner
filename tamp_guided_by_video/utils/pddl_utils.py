@@ -20,7 +20,7 @@ from examples.pybullet.utils.pybullet_tools.utils import (
     enable_gravity, wait_for_duration,
     link_from_name, get_body_name,
     end_effector_from_body, approach_from_grasp,
-    GraspInfo, Pose, inverse_kinematics,
+    Pose, inverse_kinematics,
     remove_fixed_constraint, Attachment,
     get_sample_fn, step_simulation,
     refine_path, get_joint_positions,
@@ -765,7 +765,9 @@ def get_cfree_pose_pose_test(collisions=True, disable_body_links=(), **kwargs):
             return True
         p1.assign()
         p2.assign()
-        return not pairwise_collision(b1, b2, disable_body_links=disable_body_links, **kwargs) #, max_distance=0.001)
+        return not pairwise_collision(
+            b1, b2, disable_body_links=disable_body_links, **kwargs)
+            #, max_distance=0.001)
     return test
 
 def get_cfree_obj_approach_pose_test(collisions=True, disable_body_links=()):
