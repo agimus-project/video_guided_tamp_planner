@@ -2,7 +2,7 @@
 
 
 ## Installation
-Please follow the installation procedure of GuidedTAMPBenchmark repo (TODO: add link). 
+Please follow the installation procedure of GuidedTAMPBenchmark [repo](https://github.com/agimus-project/guided_tamp_benchmark). 
 ```bash
 conda config --add channels conda-forge
 conda activate gtamp  # activate your GuidedTAMPBenchmark environment
