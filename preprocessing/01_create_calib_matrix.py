@@ -14,7 +14,8 @@ parser.add_argument(
     "-calib_object", type=str, default="ycbv_02", help="Object used in the calibration"
 )
 parser.add_argument(
-    "-calib_path", type=str,
+    "-calib_path",
+    type=str,
     default=data_folder.joinpath("calibration.pkl"),
     help="Path to pddl lib",
 )
@@ -52,6 +53,6 @@ camera_obj[:3, :3] = npq.as_rotation_matrix(npq.from_rotation_vector(avg_rot))
 if not data_folder.exists():
     data_folder.mkdir(exist_ok=True, parents=True)
 np.save(
-        data_folder.joinpath(f"calibration_{task_name}_{task_id}"),
-        world_obj.dot(np.linalg.inv(camera_obj)),
+    data_folder.joinpath(f"calibration_{task_name}_{task_id}"),
+    world_obj.dot(np.linalg.inv(camera_obj)),
 )

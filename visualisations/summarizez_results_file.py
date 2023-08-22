@@ -22,16 +22,16 @@ res_filename = get_res_file(args.res_file)
 with open(res_filename, "rb") as f:
     data = dill.load(f)
 
-tasks = [('shelf', 2)]
-planner = 'multi_contact'
-robot = 'panda'
+tasks = [("shelf", 2)]
+planner = "multi_contact"
+robot = "panda"
 
 for task, id in tasks:
     print(f"{task} {id}")
     for pose in data[planner][task][id][robot].keys():
         all_res = [v for seed, v in data[planner][task][id][robot][pose].items()]
         pos_res = [res for res in all_res if res.is_solved]
-        print(f"Pose {pose} is solved {len(pos_res)} out of {len(all_res)} ("
-              f"{[res.is_solved for res in all_res]})")
-
-
+        print(
+            f"Pose {pose} is solved {len(pos_res)} out of {len(all_res)} ("
+            f"{[res.is_solved for res in all_res]})"
+        )

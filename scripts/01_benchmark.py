@@ -100,6 +100,6 @@ for (task_cls, demo_id), pose_id in product(tas_dem_ids, poses):
         seeds=seeds,
         planner_arg=kv,
         max_planning_time=max_planning_time,
-        delta=0.001
+        delta=0.001,
     )
     b.save_benchmark()

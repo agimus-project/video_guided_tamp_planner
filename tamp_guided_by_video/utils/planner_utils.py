@@ -21,9 +21,10 @@ def sample_state_on_transition_target(
         if succ:
             q = planner.robot.modify_open_gripper(q1.copy()) if open_fingers else q1
             res = planner.task.collision.is_config_valid(
-                Configuration.from_numpy(np.array(q), robot_ndofs=len(
-                    planner.task.robot.initial_configuration()
-                ))
+                Configuration.from_numpy(
+                    np.array(q),
+                    robot_ndofs=len(planner.task.robot.initial_configuration()),
+                )
             )
             if res:
                 return q

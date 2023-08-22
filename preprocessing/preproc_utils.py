@@ -25,6 +25,8 @@ import random
 import pathlib
 
 data_folder = pathlib.Path(__file__).parent.joinpath("data")
+
+
 def get_trans_quat_hpp(matrix, shift=None):
     """
     Convert 4 x 4 numpy matrix to list of translation and quaternion in

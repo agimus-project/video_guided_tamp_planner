@@ -6,17 +6,17 @@ from robomeshcat import Robot
 import pathlib
 import pickle
 
-task = 'tunnel'
+task = "tunnel"
 id = 0
-robot = 'kmr_iiwa'
-planner = 'pddl'
+robot = "kmr_iiwa"
+planner = "pddl"
 pose_id = 0
 seed = 6  # 7, 9
-results_file = 'results_23_07_29.pkl'
+results_file = "results_23_07_29.pkl"
 
 data_folder = pathlib.Path(__file__).parent.parent.joinpath("data")
 
-with open(data_folder.joinpath(results_file), 'rb') as f:
+with open(data_folder.joinpath(results_file), "rb") as f:
     data = pickle.load(f)
 # print(data.keys())
 # cur_res = data[planner][task][id][robot][pose_id]

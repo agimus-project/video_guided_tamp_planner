@@ -12,35 +12,65 @@ import quaternion as npq
 from itertools import count
 import numpy as np
 from examples.pybullet.utils.pybullet_tools.utils import (
-    get_pose, set_pose,
-    get_movable_joints, joint_controller,
-    sample_placement, Point,
-    set_joint_positions, add_fixed_constraint,
-    enable_real_time, disable_real_time,
-    enable_gravity, wait_for_duration,
-    link_from_name, get_body_name,
-    end_effector_from_body, approach_from_grasp,
-    Pose, inverse_kinematics,
-    remove_fixed_constraint, Attachment,
-    get_sample_fn, step_simulation,
-    refine_path, get_joint_positions,
-    wait_if_gui, flatten,
-    expand_links, any_link_pair_collision,
-    get_self_link_pairs, MAX_DISTANCE,
-    get_moving_links, CollisionPair,
-    parse_body, get_custom_limits,
-    cached_fn, get_buffered_aabb,
-    all_between, aabb_overlap,
-    pairwise_link_collision, product,
-    get_distance_fn, get_extend_fn,
-    check_initial_end, birrt,
+    get_pose,
+    set_pose,
+    get_movable_joints,
+    joint_controller,
+    sample_placement,
+    Point,
+    set_joint_positions,
+    add_fixed_constraint,
+    enable_real_time,
+    disable_real_time,
+    enable_gravity,
+    wait_for_duration,
+    link_from_name,
+    get_body_name,
+    end_effector_from_body,
+    approach_from_grasp,
+    Pose,
+    inverse_kinematics,
+    remove_fixed_constraint,
+    Attachment,
+    get_sample_fn,
+    step_simulation,
+    refine_path,
+    get_joint_positions,
+    wait_if_gui,
+    flatten,
+    expand_links,
+    any_link_pair_collision,
+    get_self_link_pairs,
+    MAX_DISTANCE,
+    get_moving_links,
+    CollisionPair,
+    parse_body,
+    get_custom_limits,
+    cached_fn,
+    get_buffered_aabb,
+    all_between,
+    aabb_overlap,
+    pairwise_link_collision,
+    product,
+    get_distance_fn,
+    get_extend_fn,
+    check_initial_end,
+    birrt,
     interpolate_joint_waypoints,
-    EPSILON, get_nonholonomic_distance_fn,
-    get_nonholonomic_extend_fn, set_default_camera,
-    load_model, is_placement,
-    get_bodies, HideOutput,
-    draw_pose, draw_global_system,
-    pose_from_tform, interpolate_poses, multiply, invert
+    EPSILON,
+    get_nonholonomic_distance_fn,
+    get_nonholonomic_extend_fn,
+    set_default_camera,
+    load_model,
+    is_placement,
+    get_bodies,
+    HideOutput,
+    draw_pose,
+    draw_global_system,
+    pose_from_tform,
+    interpolate_poses,
+    multiply,
+    invert,
 )
 
 # , get_closest_points
@@ -77,7 +107,7 @@ def load_world(task, demo_init_obj_poses, robot_pose):
     draw_global_system()
     body_names = {}
     rise_robot_up = np.eye(4)
-    if task.robot.robot_type == 'fixed':
+    if task.robot.robot_type == "fixed":
         rise_robot_up[2, 3] += 0.01
     # robot_paths = {'panda': PANDA_ARM_URDF, 'ur5': UR5_URDF,
     # 'kmr_iiwa': KUKA_KMR_URDF}
@@ -190,8 +220,9 @@ def pddlstream_from_problem(
         ),
         # 'sample-grasp': from_gen_fn(get_grasp_gen(robot, grasp_name)),
         "sample-grasp": from_gen_fn(
-            get_hpp_grasps_gen(robot, movable, objects,
-                               allow_side_handles=allow_side_handles)
+            get_hpp_grasps_gen(
+                robot, movable, objects, allow_side_handles=allow_side_handles
+            )
             if grasps == "ours"
             else None
             # else get_grasp_gen(robot, grasp_name)
@@ -209,8 +240,9 @@ def pddlstream_from_problem(
                 robot, fixed, teleport, disable_body_links=disable_body_links
             )
         ),
-        "test-cfree-pose-pose": from_test(get_cfree_pose_pose_test(
-            disable_body_links=disable_body_links)),
+        "test-cfree-pose-pose": from_test(
+            get_cfree_pose_pose_test(disable_body_links=disable_body_links)
+        ),
         "test-cfree-approach-pose": from_test(get_cfree_obj_approach_pose_test()),
         "test-cfree-traj-pose": from_test(
             negate_test(
@@ -249,9 +281,9 @@ def get_fixed(robot, movable):
 #         ),
 #         approach_pose=Pose(0.1 * Point(z=1)),
 #     ),
-    # 'top': GraspInfo(lambda body: get_top_grasps(body, under=True, tool_pose=Pose(),
-    # max_width=INF, grasp_length=0.),
-    #                  approach_pose=Pose(0.1 * Point(z=1))),
+# 'top': GraspInfo(lambda body: get_top_grasps(body, under=True, tool_pose=Pose(),
+# max_width=INF, grasp_length=0.),
+#                  approach_pose=Pose(0.1 * Point(z=1))),
 # }
 
 
@@ -521,13 +553,15 @@ def pose_to_xyz_quat(handle_pose):
 # allow_side_handles=False):
 
 approach_points = {
-    'Xp': Point(y=1),
-    'Xm': Point(y=-1),
-    'Yp': Point(x=1),
-    'Ym': Point(x=-1),
-    'Zp': Point(z=1),
-    'Zm': Point(z=-1),
+    "Xp": Point(y=1),
+    "Xm": Point(y=-1),
+    "Yp": Point(x=1),
+    "Ym": Point(x=-1),
+    "Zp": Point(z=1),
+    "Zm": Point(z=-1),
 }
+
+
 def get_hpp_grasps_gen(robot, obj_ids, objects, allow_side_handles=False):
     """
     How are grasps defined? Grasp in pddl is object center pose w.r.t. gripper
@@ -541,8 +575,8 @@ def get_hpp_grasps_gen(robot, obj_ids, objects, allow_side_handles=False):
             handles = [h for h in handles if h[-2] != "S"]
 
         grasps_per_obj[obj_id] = [
-            (pose_to_xyz_quat(h_poses[h]), Pose(0.1 * approach_points[h[6:8]])) for h in
-            handles
+            (pose_to_xyz_quat(h_poses[h]), Pose(0.1 * approach_points[h[6:8]]))
+            for h in handles
         ]
     tool_link = get_tool_link(robot)
 
@@ -759,6 +793,7 @@ def pairwise_collision(body1, body2, disable_body_links=None, **kwargs):
         return any_link_pair_collision(body1, links1, body2, links2, **kwargs)
     return body_collision(body1, body2, disable_body_links=disable_body_links, **kwargs)
 
+
 def get_cfree_pose_pose_test(collisions=True, disable_body_links=(), **kwargs):
     def test(b1, p1, b2, p2):
         if not collisions or (b1 == b2):
@@ -766,9 +801,12 @@ def get_cfree_pose_pose_test(collisions=True, disable_body_links=(), **kwargs):
         p1.assign()
         p2.assign()
         return not pairwise_collision(
-            b1, b2, disable_body_links=disable_body_links, **kwargs)
-            #, max_distance=0.001)
+            b1, b2, disable_body_links=disable_body_links, **kwargs
+        )
+        # , max_distance=0.001)
+
     return test
+
 
 def get_cfree_obj_approach_pose_test(collisions=True, disable_body_links=()):
     def test(b1, p1, g1, b2, p2):
@@ -782,7 +820,9 @@ def get_cfree_obj_approach_pose_test(collisions=True, disable_body_links=()):
             if pairwise_collision(b1, b2, disable_body_links=disable_body_links):
                 return False
         return True
+
     return test
+
 
 def get_collision_fn(
     body,

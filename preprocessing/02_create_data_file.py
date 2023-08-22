@@ -12,23 +12,31 @@ from preprocessing.preproc_utils import (
     assign_contact_to_obj,
     get_all_contacts,
     get_compact_contact,
-    data_folder
+    data_folder,
 )
 
 if __name__ == "__main__":
     furniture_poses = {
-        'table': np.array([[1., 0., 0., 0.],
-                           [0., 1., 0., -0.1],
-                           [0., 0., 1., 0.75],
-                           [0., 0., 0., 1.]]),
-        'shelf': np.array([[1., 0., 0., 0.95],
-                           [0., 1., 0., 0.],
-                           [0., 0., 1., 1.28],
-                           [0., 0., 0., 1.]]),
+        "table": np.array(
+            [
+                [1.0, 0.0, 0.0, 0.0],
+                [0.0, 1.0, 0.0, -0.1],
+                [0.0, 0.0, 1.0, 0.75],
+                [0.0, 0.0, 0.0, 1.0],
+            ]
+        ),
+        "shelf": np.array(
+            [
+                [1.0, 0.0, 0.0, 0.95],
+                [0.0, 1.0, 0.0, 0.0],
+                [0.0, 0.0, 1.0, 1.28],
+                [0.0, 0.0, 0.0, 1.0],
+            ]
+        ),
     }
     furniture_params = {
-        'table': {'desk_size': [1.5, 1.1, 0.75], 'leg_display': True},
-        'shelf': {'display_inside_shelf': False}
+        "table": {"desk_size": [1.5, 1.1, 0.75], "leg_display": True},
+        "shelf": {"display_inside_shelf": False},
     }
     assert furniture_poses.keys() == furniture_params.keys()
 
@@ -174,7 +182,7 @@ if __name__ == "__main__":
             if args.replace:
                 # TODO: check that tray is included correctly
 
-                for robot in ['panda', 'ur5', 'kmr_iiwa']:
+                for robot in ["panda", "ur5", "kmr_iiwa"]:
                     demo = Demonstration()
                     demo.task_name = task_name
                     demo.demo_id = task_id

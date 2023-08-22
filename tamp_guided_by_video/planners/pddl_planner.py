@@ -26,6 +26,7 @@ class PDDLPath(Path):
         idx = int(t * (len(self.planner.config_list) - 1))
         return self.planner.config_list[idx]
 
+
 class PDDLPlanner(BasePlanner):
     """
     This is pddl planner from Caelan R. Garrett, Tomás Lozano-Pérez,
@@ -42,7 +43,7 @@ class PDDLPlanner(BasePlanner):
         max_planning_time: int = 1000,
         handles_mode: str = "all",
         random_seed: Optional[int] = None,
-        verbose: bool = False
+        verbose: bool = False,
     ):
         self.task = task
         self.max_planning_time = max_planning_time
@@ -73,7 +74,7 @@ class PDDLPlanner(BasePlanner):
             disable_body_links=disable_body_links,
             grasps="ours",
             robot_name=self.task.robot.name,
-            allow_side_handles=True if self.handles_mode == 'all' else False,
+            allow_side_handles=True if self.handles_mode == "all" else False,
         )
         _, _, _, stream_map, init, goal = problem
         solution, summary = solve(

@@ -148,7 +148,8 @@ class MultiContactPlanner(HppPlanner):
             # 1a. sample new subgoal
             if random.uniform(0, 1) < self.sample_subgoal_prob:
                 subgoal_start_node, subgoal_end_node = self.generate_new_subgoal(
-                    stable_obj=False #if self.task.demo.task_name == "waiter" else True
+                    stable_obj=False
+                    # if self.task.demo.task_name == "waiter" else True
                 )
                 if subgoal_start_node is None:
                     continue

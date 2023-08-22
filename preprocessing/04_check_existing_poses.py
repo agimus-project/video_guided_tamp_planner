@@ -13,7 +13,6 @@ from tamp_guided_by_video.utils.corba import CorbaServer
 from tamp_guided_by_video.utils.demo_processing import ensure_normalized
 
 
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
 
@@ -41,8 +40,9 @@ if __name__ == "__main__":
         assert len(args.task_ids) > 0
         for task_id in args.task_ids:
             for pose_id in range(10):
-                task = get_task_class(task_name)(task_id, get_robot(args.robot),
-                                                 pose_id)
+                task = get_task_class(task_name)(
+                    task_id, get_robot(args.robot), pose_id
+                )
                 planner = MultiContactPlanner(
                     task,
                     max_planning_time=300,
@@ -60,13 +60,16 @@ if __name__ == "__main__":
                     for i in range(planner.object_poses.shape[0]):
                         flat_poses += list(
                             ensure_normalized(
-                                pin.SE3ToXYZQUAT(pin.SE3(planner.object_poses[i][j])))
+                                pin.SE3ToXYZQUAT(pin.SE3(planner.object_poses[i][j]))
+                            )
                         )
                     object_poses_flat.append(flat_poses)
-                q_start = list(task.robot.initial_configuration()) + object_poses_flat[
-                    0]
-                q_goal = list(task.robot.initial_configuration()) + object_poses_flat[
-                    -1]
+                q_start = (
+                    list(task.robot.initial_configuration()) + object_poses_flat[0]
+                )
+                q_goal = (
+                    list(task.robot.initial_configuration()) + object_poses_flat[-1]
+                )
 
                 # check that start and goal are valid configs
 
@@ -79,7 +82,7 @@ if __name__ == "__main__":
                     q_start,
                     object_poses_flat,
                     visualize_mid_stages=False,
-                    max_iter=150
+                    max_iter=150,
                 )
                 print(f"Pose {pose_id}: {res}")
                 # print(configs)
@@ -87,6 +90,7 @@ if __name__ == "__main__":
                     from guided_tamp_benchmark.tasks.renderer import Renderer
                     from guided_tamp_benchmark.core.configuration import Configuration
                     import time
+
                     r = Renderer(task=planner.task)
                     robot_ndof = len(planner.task.robot.initial_configuration())
                     r.robot.pose = planner.task.demo.robot_pose
