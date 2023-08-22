@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "tamp_guided_by_video"
+version = "0.1.0"
+description = "Planning guided by demonstration."
+authors = ["Kateryna Zorina <zorinkat@fbmi.cvut.cz>"]
+license = "BSD-2-Clause license"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.7"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.0.260"
+black = "^23.3.0"
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
