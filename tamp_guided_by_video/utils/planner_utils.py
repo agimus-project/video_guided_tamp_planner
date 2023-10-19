@@ -1,6 +1,4 @@
 from typing import Optional, TYPE_CHECKING
-from guided_tamp_benchmark.core import Configuration
-import numpy as np
 
 if TYPE_CHECKING:
     from tamp_guided_by_video.planners.hpp_planner import HppPlanner
