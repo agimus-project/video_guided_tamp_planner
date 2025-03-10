@@ -6,8 +6,8 @@ from tamp_guided_by_video.utils.planner_utils import (
 from tamp_guided_by_video.utils.corba import CorbaServer
 from guided_tamp_benchmark.core import Configuration
 from guided_tamp_benchmark.tasks import BaseTask
-from itertools import chain
-from anytree import PreOrderIter
+# from itertools import chain
+# from anytree import PreOrderIter
 import numpy as np
 import random
 import time
@@ -16,7 +16,7 @@ from typing import Optional
 from anytree import Node
 from tamp_guided_by_video.utils.planner_utils import get_config_states
 from tamp_guided_by_video.utils.demo_processing import ensure_normalized
-from sklearn.manifold import TSNE
+# from sklearn.manifold import TSNE
 
 
 class StateNode(Node):
