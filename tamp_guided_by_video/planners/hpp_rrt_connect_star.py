@@ -17,7 +17,6 @@ from anytree import Node
 from tamp_guided_by_video.utils.planner_utils import get_config_states
 from tamp_guided_by_video.utils.demo_processing import ensure_normalized
 from sklearn.manifold import TSNE
-from tamp_guided_by_video.utils.plot_tree import plot_rrt_star_tsne
 
 
 class StateNode(Node):
