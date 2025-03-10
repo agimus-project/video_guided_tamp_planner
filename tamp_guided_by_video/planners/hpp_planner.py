@@ -123,6 +123,10 @@ class HppPlanner(BasePlanner):
         self.ps = ProblemSolver(self.robot)
         self.ps.setErrorThreshold(error_threshold)
         self.ps.setMaxIterProjection(max_iter_projection)
+        self.ps.addPathOptimizer("SimpleTimeParameterization")
+        self.ps.setParameter("SimpleTimeParameterization/maxAcceleration", 0.5)
+        self.ps.setParameter("SimpleTimeParameterization/order", 2)
+        self.ps.setParameter("SimpleTimeParameterization/safety", 0.95)
         if self.max_planning_time is not None:
             self.ps.setTimeOutPathPlanning(self.max_planning_time)
 
@@ -317,11 +321,40 @@ class HppPlanner(BasePlanner):
         solved successfully, it will correspond to the solution trajectory.
         """
         path_id = self.ps.numberPaths() - 1
-        nframes = np.ceil(self.ps.pathLength(path_id) * fps).astype(int)
-        return [
-            self.ps.configAtParam(path_id, t)
-            for t in np.linspace(0.0, self.ps.pathLength(path_id), nframes)
-        ]
+        # nframes = np.ceil(self.ps.pathLength(path_id) * fps).astype(int)
+        path_len = self.ps.pathLength(path_id)
+        print(f"Path len is {path_len}")
+        nframes = 300
+        wpts, times = self.ps.getWaypoints(path_id)
+        subset_wpts = [wpts[0]]
+        subset_times = [times[0]]
+        for wpt, time in zip(wpts[1:], times[1:]):
+            if np.any(['intersec' in state for state in get_config_states(self, wpt)]):
+                subset_wpts.append(wpt)
+                subset_times.append(time)
+        subset_wpts.append(wpts[-1])
+        subset_times.append(times[-1])
+
+        # Create a list of configs to be returned
+        configs = []
+        
+        # Sample between the waypoints, respecting the segment length
+        for i in range(len(subset_times) - 1):
+            start_time = subset_times[i]
+            end_time = subset_times[i + 1]
+            
+            # Determine how many samples should be taken for this segment
+            segment_len = np.abs(end_time - start_time)  
+            samples_in_segment = int(np.round((segment_len / (path_len / (nframes - 1))))) 
+            
+            # Sample the intermediate configurations
+            for t in np.linspace(start_time, end_time, samples_in_segment, endpoint=False):
+                configs.append(self.ps.configAtParam(path_id, t))
+        
+        # Add the final configuration
+        configs.append(self.ps.configAtParam(path_id, subset_times[-1]))
+
+        return configs
 
     def get_start_goal(self) -> (list[float], list[float]):
         """Function to create start and goal configurations for the current task"""
