@@ -124,7 +124,7 @@ class HppPlanner(BasePlanner):
         self.ps.setErrorThreshold(error_threshold)
         self.ps.setMaxIterProjection(max_iter_projection)
         self.ps.addPathOptimizer("SimpleTimeParameterization")
-        self.ps.setParameter("SimpleTimeParameterization/maxAcceleration", 0.5)
+        self.ps.setParameter("SimpleTimeParameterization/maxAcceleration", 2.0)
         self.ps.setParameter("SimpleTimeParameterization/order", 2)
         self.ps.setParameter("SimpleTimeParameterization/safety", 0.95)
         if self.max_planning_time is not None:

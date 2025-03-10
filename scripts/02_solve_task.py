@@ -87,10 +87,10 @@ if res:
     import numpy as np
     results_folder = f"results_{args.planner}_{args.task_name}{args.task_id}_rpose{args.pose_id}"
     res_folder = pathlib.Path(__file__).parent.parent / "results" / results_folder
-    os.makedirs(results_folder, exist_ok=True)
+    os.makedirs(res_folder, exist_ok=True)
 
     filename = f"{args.seed:05d}.pkl"
-    file_path = os.path.join(results_folder, filename)
+    file_path = os.path.join(res_folder, filename)
     pickle.dump({
         "solve_time_s": end_time - start_time,
         "config_list": planner.config_list,

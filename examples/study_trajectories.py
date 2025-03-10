@@ -39,9 +39,9 @@ results_folder = f"results_{planner}_{task_name}{task_id}_rpose{pose_id}"
 l_array = []
 save_ee_poses = []
 traj_list = []
-for seed in range(all_seeds):
+for seed in range(1000, all_seeds):
     filename = f"{seed:05d}.pkl"
-    file_path = pathlib.Path(__file__).parent / "results" / results_folder / filename
+    file_path = pathlib.Path(__file__).parent.parent / "results" / results_folder / filename
     if not file_path.exists():
         print(f"File {file_path} does not exist")
         continue
@@ -79,7 +79,8 @@ print(min_l, max_l)
 print(traj_list.shape) 
 print(type(traj_list[0]))
 print(len(traj_list[0]))
-np.save(f'results_{planner}_{task_name}{task_id}_rpose{pose_id}_best{pecentage_go_grab}.npy', traj_list)
+save_dir = pathlib.Path(__file__).parent.parent / "results" 
+np.save(save_dir / f'results_{planner}_{task_name}{task_id}_rpose{pose_id}_best{pecentage_go_grab}.npy', traj_list)
 
 
 for rot_l_joints, ee_poses in zip(l_array, save_ee_poses):
