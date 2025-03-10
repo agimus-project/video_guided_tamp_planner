@@ -5,13 +5,13 @@
 #SBATCH --ntasks=1                    # Number of tasks (1 Python process per job)
 #SBATCH --cpus-per-task=32            # Number of cores per task
 #SBATCH --mem=64G                     # Memory per node
-#SBATCH --time=01:00:00              # Max runtime (1 hour in this example)
+#SBATCH --time=15:00:00              # Max runtime (1 hour in this example)
 #SBATCH --array=1-5                 # Create a job array with 5 tasks (1-5)
 #SBATCH --nodes=1                     # Request 1 node per task
 #SBATCH --exclusive                   # Request exclusive use of the node
 
-from_iter=$((1000 + (SLURM_ARRAY_TASK_ID - 1) * 10))
-to_iter=$((1000 + SLURM_ARRAY_TASK_ID * 10))
+from_iter=$((1000 + (SLURM_ARRAY_TASK_ID - 1) * 80))
+to_iter=$((1000 + SLURM_ARRAY_TASK_ID * 80))
 
 # TODO: modify this for your system
 . ~/miniconda3/etc/profile.d/conda.sh
