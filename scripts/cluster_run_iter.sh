@@ -20,7 +20,7 @@ export PYTHONPATH=~/video_guided_tamp_planner:~/guided_tamp_benchmark:$PYTHONPAT
 
 
 # Loop to run the command
-for ((i=from_iter; i<=to_iter; i++))
+for ((i=from_iter; i<to_iter; i++))
 do
   echo "Running iteration $i of $to_iter"
   python 02_solve_task.py -planner rrt_star_connect -seed $i -task_id 0 -pose_id 1
