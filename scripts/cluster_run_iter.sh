@@ -3,10 +3,11 @@
 #SBATCH --output=logs/job_output_%A_%a.log # Output log file, %A is the job ID and %a is the array task ID
 #SBATCH --error=logs/job_error_%A_%a.log   # Error log file
 #SBATCH --ntasks=1                    # Number of tasks (1 Python process per job)
-#SBATCH --cpus-per-task=4            # Number of cores per task
-#SBATCH --mem=4G                     # Memory per node
+#SBATCH --cpus-per-task=8            # Number of cores per task
+#SBATCH --mem=8G                     # Memory per node
 #SBATCH --time=01:00:00              # Max runtime (1 hour in this example)
 #SBATCH --array=1-10                 # Create a job array with 10 tasks (1-10)
+#SBATCH --nodes=1                     # Request 1 node per task
 
 from_iter=$((1000 + (SLURM_ARRAY_TASK_ID - 1) * 5))
 to_iter=$((1000 + SLURM_ARRAY_TASK_ID * 5))
