@@ -6,6 +6,7 @@ from robomeshcat import Robot
 import argparse
 import pickle
 import numpy as np
+import pathlib
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -85,6 +86,7 @@ if res:
     import os
     import numpy as np
     results_folder = f"results_{args.planner}_{args.task_name}{args.task_id}_rpose{args.pose_id}"
+    res_folder = pathlib.Path(__file__).parent.parent / "results" / results_folder
     os.makedirs(results_folder, exist_ok=True)
 
     filename = f"{args.seed:05d}.pkl"

@@ -31,7 +31,7 @@ planner = 'rrt_star_connect'
 task_name = 'shelf'
 task_id = 0
 pose_id = 1
-all_seeds = 1000
+all_seeds = 1005
 pecentage_go_grab = 20
 desired_len = 300
 task = get_task(task_name)(task_id, get_robot('panda'), pose_id)
@@ -41,7 +41,7 @@ save_ee_poses = []
 traj_list = []
 for seed in range(all_seeds):
     filename = f"{seed:05d}.pkl"
-    file_path = pathlib.Path(__file__).parent / results_folder / filename
+    file_path = pathlib.Path(__file__).parent / "results" / results_folder / filename
     if not file_path.exists():
         print(f"File {file_path} does not exist")
         continue

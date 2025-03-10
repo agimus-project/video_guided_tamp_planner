@@ -15,6 +15,6 @@ export PYTHONPATH=/home/kzorina/work/repos/video_guided_tamp_planner:/home/kzori
 # Loop to run the command
 for ((i=from_iter; i<=to_iter; i++))
 do
-  echo "Running iteration $i of $iterations"
+  echo "Running iteration $i of $to_iter"
   python 02_solve_task.py -planner rrt_star_connect -seed $i -task_id 0 -pose_id 1
 done
