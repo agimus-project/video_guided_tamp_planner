@@ -6,11 +6,12 @@
 #SBATCH --cpus-per-task=8            # Number of cores per task
 #SBATCH --mem=8G                     # Memory per node
 #SBATCH --time=01:00:00              # Max runtime (1 hour in this example)
-#SBATCH --array=1-10                 # Create a job array with 10 tasks (1-10)
+#SBATCH --array=1-5                 # Create a job array with 5 tasks (1-5)
 #SBATCH --nodes=1                     # Request 1 node per task
+#SBATCH --exclusive                   # Request exclusive use of the node
 
-from_iter=$((1000 + (SLURM_ARRAY_TASK_ID - 1) * 5))
-to_iter=$((1000 + SLURM_ARRAY_TASK_ID * 5))
+from_iter=$((1000 + (SLURM_ARRAY_TASK_ID - 1) * 10))
+to_iter=$((1000 + SLURM_ARRAY_TASK_ID * 10))
 
 # TODO: modify this for your system
 . ~/miniconda3/etc/profile.d/conda.sh
