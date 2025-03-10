@@ -10,11 +10,12 @@ def sample_state_on_transition_target(
     transition: str,
     max_iter: int = 1,
     open_fingers: bool = True,
+    q_random: list[float] = None,
 ) -> Optional[list[float]]:
     """Sample a configuration, that lies on some transition from the q_from"""
     for i in range(max_iter):
         succ, q1, err = planner.cg.generateTargetConfig(
-            transition, q_from, planner.robot.shootRandomConfig()
+            transition, q_from, planner.robot.shootRandomConfig() if q_random is None else q_random
         )
         if succ:
             q = planner.robot.modify_open_gripper(q1.copy()) if open_fingers else q1

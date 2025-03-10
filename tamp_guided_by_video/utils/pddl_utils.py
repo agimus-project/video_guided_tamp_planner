@@ -571,6 +571,7 @@ def get_hpp_grasps_gen(robot, obj_ids, objects, allow_side_handles=False):
     for obj_id, obj in zip(obj_ids, objects):
         h_poses = obj.get_handles_poses()
         handles = list(h_poses.keys())
+        handles = [h for h in handles if "fake" not in h]
         if not allow_side_handles:
             handles = [h for h in handles if h[-2] != "S"]
 
