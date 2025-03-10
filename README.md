@@ -46,3 +46,4 @@ In order to run `PDDL` method in benchmark, follow next steps:
     `pddlstream/language/generator.py`, `pddlstream/language/stream.py`, 
     `pddlstream/algorithms/instantiation.py`, `pddlstream/algorithms/skeleton.py`
 - Pass the correct `-pddl_path` argument to scripts
+- `mamba install pybullet`

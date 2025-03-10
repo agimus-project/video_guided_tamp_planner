@@ -1,4 +1,5 @@
 .idea
+.vscode
 data
 visualisations/data
 visualisations/meshcat
@@ -6,3 +7,5 @@ temp
 statistics
 paper
 video
+results
+*__pycache__
