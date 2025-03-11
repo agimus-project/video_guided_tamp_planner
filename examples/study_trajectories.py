@@ -68,8 +68,8 @@ save_ee_poses = save_ee_poses[l_array <= tolerated_len]
 l_array = l_array[l_array <= tolerated_len]
 # breakpoint()
 # Plot the end-effector poses with color based on the length
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
 max_l = max(l_array)
 min_l = min(l_array)
 print(min_l, max_l)
