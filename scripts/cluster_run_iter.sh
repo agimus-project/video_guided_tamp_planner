@@ -10,8 +10,8 @@
 #SBATCH --nodes=1                     # Request 1 node per task
 #SBATCH --exclusive                   # Request exclusive use of the node
 
-from_iter=$((1000 + (SLURM_ARRAY_TASK_ID - 1) * 80))
-to_iter=$((1000 + SLURM_ARRAY_TASK_ID * 80))
+from_iter=$((1400 + (SLURM_ARRAY_TASK_ID - 1) * 80))
+to_iter=$((1400 + SLURM_ARRAY_TASK_ID * 80))
 
 # TODO: modify this for your system
 . ~/miniconda3/etc/profile.d/conda.sh
