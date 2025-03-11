@@ -31,7 +31,7 @@ planner = 'rrt_star_connect'
 task_name = 'shelf'
 task_id = 0
 pose_id = 1
-all_seeds = 1005
+all_seeds = 1400
 pecentage_go_grab = 20
 desired_len = 300
 task = get_task(task_name)(task_id, get_robot('panda'), pose_id)
@@ -61,7 +61,7 @@ save_ee_poses = np.array(save_ee_poses)
 traj_list = np.array(traj_list)
 
 tolerated_len = np.percentile(l_array, pecentage_go_grab)
-print(traj_list.shape) 
+print('traj_list.shape', traj_list.shape) 
 
 traj_list = traj_list[l_array <= tolerated_len]
 save_ee_poses = save_ee_poses[l_array <= tolerated_len]
@@ -76,7 +76,7 @@ print(min_l, max_l)
 
 
 
-print(traj_list.shape) 
+print(f'{pecentage_go_grab}% of traj_list', traj_list.shape) 
 # print(type(traj_list[0]))
 # print(len(traj_list[0]))
 # save_dir = pathlib.Path(__file__).parent.parent / "results" 
