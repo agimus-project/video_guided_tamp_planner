@@ -77,24 +77,24 @@ print(min_l, max_l)
 
 
 print(traj_list.shape) 
-print(type(traj_list[0]))
-print(len(traj_list[0]))
-save_dir = pathlib.Path(__file__).parent.parent / "results" 
-np.save(save_dir / f'results_{planner}_{task_name}{task_id}_rpose{pose_id}_best{pecentage_go_grab}.npy', traj_list)
+# print(type(traj_list[0]))
+# print(len(traj_list[0]))
+# save_dir = pathlib.Path(__file__).parent.parent / "results" 
+# np.save(save_dir / f'results_{planner}_{task_name}{task_id}_rpose{pose_id}_best{pecentage_go_grab}.npy', traj_list)
 
 
-for rot_l_joints, ee_poses in zip(l_array, save_ee_poses):
-    normalized_len = (rot_l_joints - min_l) / (max_l - min_l)
-    # print(rot_l_joints)
-    # print(ee_poses.shape)
-    # Plot a line plot of EE poses (gradient from red to green)
-    ee_color = plt.cm.RdYlGn(1 - normalized_len)
-    # print([round(x,2) for x in ee_poses[0]])
-    # print([round(x,2) for x in ee_poses[10]])
-    # print([round(x,2) for x in ee_poses[100]])
-    ax.scatter(ee_poses[0, 0], ee_poses[0, 1], ee_poses[0, 2], color='g')
-    # ax.scatter(ee_poses[-1, 0], ee_poses[-1, 1], ee_poses[-1, 2], color='r')
-    ax.plot(ee_poses[::10, 0], ee_poses[::10, 1], ee_poses[::10, 2], color=ee_color, alpha=0.2)
-plt.show()
+# for rot_l_joints, ee_poses in zip(l_array, save_ee_poses):
+#     normalized_len = (rot_l_joints - min_l) / (max_l - min_l)
+#     # print(rot_l_joints)
+#     # print(ee_poses.shape)
+#     # Plot a line plot of EE poses (gradient from red to green)
+#     ee_color = plt.cm.RdYlGn(1 - normalized_len)
+#     # print([round(x,2) for x in ee_poses[0]])
+#     # print([round(x,2) for x in ee_poses[10]])
+#     # print([round(x,2) for x in ee_poses[100]])
+#     ax.scatter(ee_poses[0, 0], ee_poses[0, 1], ee_poses[0, 2], color='g')
+#     # ax.scatter(ee_poses[-1, 0], ee_poses[-1, 1], ee_poses[-1, 2], color='r')
+#     ax.plot(ee_poses[::10, 0], ee_poses[::10, 1], ee_poses[::10, 2], color=ee_color, alpha=0.2)
+# plt.show()
     
 # Select only low length ones
