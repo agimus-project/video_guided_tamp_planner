@@ -5,7 +5,7 @@
 #SBATCH --ntasks=1                    # Number of tasks (1 Python process per job)
 #SBATCH --cpus-per-task=16            # Number of cores per task
 #SBATCH --mem=64G                     # Memory per node
-#SBATCH --time=15:00:00              # Max runtime (1 hour in this example)
+#SBATCH --time=24:00:00              # Max runtime (1 hour in this example)
 #SBATCH --nodes=1                     # Request 1 node per task
 #SBATCH --array=1-10                  # Job array with 5 tasks
 #SBATCH --nodelist=node-01,node-02,node-03,node-04,node-05,node-06,node-07,node-08,node-09,node-10  # Specific nodes
@@ -25,8 +25,8 @@ echo "Running on $NODE_TO_USE"
 export SLURM_NODELIST=$NODE_TO_USE       # Override assigned node
 
 
-from_iter=$((1800 + (SLURM_ARRAY_TASK_ID - 1) * 80))
-to_iter=$((1800 + SLURM_ARRAY_TASK_ID * 80))
+from_iter=$((2200 + (SLURM_ARRAY_TASK_ID - 1) * 130))
+to_iter=$((2200 + SLURM_ARRAY_TASK_ID * 130))
 
 # TODO: modify this for your system
 . ~/miniconda3/etc/profile.d/conda.sh
