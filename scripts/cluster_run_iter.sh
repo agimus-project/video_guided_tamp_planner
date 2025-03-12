@@ -7,28 +7,14 @@
 #SBATCH --mem=64G                     # Memory per node
 #SBATCH --time=24:00:00              # Max runtime (1 hour in this example)
 #SBATCH --nodes=1                     # Request 1 node per task
-#SBATCH --array=1-5                  # Job array with 5 tasks
-#SBATCH --nodelist=node-02,node-03,node-04,node-05,node-06  # Specific nodes
 
-# 5 nodes:
-# --array=1-10                  # Job array with 10 tasks
-# --nodelist=node-02,node-03,node-04,node-05,node-06  # Specific nodes
-# NODES=("node-02" "node-03" "node-04" "node-05" "node-06" )
+# Extract node number (assumes format "node-XX")
+NODE_NUM=$(echo $SLURM_NODELIST | grep -o '[0-9]\+')
 
-# 10 nodes:
-# --array=1-5                  # Job array with 5 tasks
-# --nodelist=node-01,node-02,node-03,node-04,node-05,node-06,node-07,node-08,node-09,node-10  # Specific nodes
-# NODES=("node-01" "node-02" "node-03" "node-04" "node-05" "node-06" "node-07" "node-08" "node-09" "node-10")
+# Compute iteration range
+from_iter=$((2200 + (NODE_NUM - 1) * 130))
+to_iter=$((from_iter + 130))
 
-NODES=("node-01" "node-02" "node-03" "node-04" "node-05" "node-06" "node-07" "node-08" "node-09" "node-10")
-TASK_INDEX=$((SLURM_ARRAY_TASK_ID - 1))  # Convert SLURM ID (1-based) to 0-based index
-NODE_TO_USE=${NODES[$TASK_INDEX]}        # Select the node for this job
-echo "Running on $NODE_TO_USE"
-export SLURM_NODELIST=$NODE_TO_USE       # Override assigned node
-
-
-from_iter=$((2200 + (SLURM_ARRAY_TASK_ID - 1) * 130))
-to_iter=$((2200 + SLURM_ARRAY_TASK_ID * 130))
 
 # TODO: modify this for your system
 . ~/miniconda3/etc/profile.d/conda.sh
