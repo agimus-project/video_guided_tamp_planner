@@ -7,10 +7,10 @@
 #SBATCH --mem=64G                     # Memory per node
 #SBATCH --time=24:00:00              # Max runtime (1 hour in this example)
 #SBATCH --nodes=1                     # Request 1 node per task
-#SBATCH --nodelist=node-07
+#SBATCH --nodelist=node-11
 
 # Extract node number (assumes format "node-XX")
-NODE_NUM=$(echo $SLURM_NODELIST | grep -o '[0-9]\+')
+NODE_NUM=7
 echo "Node - $SLURM_NODELIST"
 
 # Compute iteration range

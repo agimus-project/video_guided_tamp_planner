@@ -10,7 +10,7 @@
 #SBATCH --nodelist=node-08
 
 # Extract node number (assumes format "node-XX")
-NODE_NUM=$(echo $SLURM_NODELIST | grep -o '[0-9]\+')
+NODE_NUM=8
 echo "Node - $SLURM_NODELIST"
 
 # Compute iteration range
