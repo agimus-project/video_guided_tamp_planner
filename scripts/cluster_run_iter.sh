@@ -1,13 +1,12 @@
 #!/bin/bash
 #SBATCH --job-name=rrt_connect   # Job name
-#SBATCH --output=logs/job_output_%A_%a.log # Output log file, %A is the job ID and %a is the array task ID
-#SBATCH --error=logs/job_error_%A_%a.log   # Error log file
+#SBATCH --output=logs/job_output_%A.log # Output log file, %A is the job ID and %a is the array task ID
+#SBATCH --error=logs/job_error_%A.log   # Error log file
 #SBATCH --ntasks=1                    # Number of tasks (1 Python process per job)
 #SBATCH --cpus-per-task=16            # Number of cores per task
 #SBATCH --mem=64G                     # Memory per node
 #SBATCH --time=24:00:00              # Max runtime (1 hour in this example)
 #SBATCH --nodes=1                     # Request 1 node per task
-#SBATCH --nodelist=node-02            # Manually assign node (change this for each job)
 
 # Extract node number (assumes format "node-XX")
 NODE_NUM=$(echo $SLURM_NODELIST | grep -o '[0-9]\+')
