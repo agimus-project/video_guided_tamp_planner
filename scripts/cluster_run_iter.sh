@@ -7,8 +7,8 @@
 #SBATCH --mem=64G                     # Memory per node
 #SBATCH --time=24:00:00              # Max runtime (1 hour in this example)
 #SBATCH --nodes=1                     # Request 1 node per task
-#SBATCH --array=1-10                  # Job array with 10 tasks
-#SBATCH --nodelist=node-01,node-02,node-03,node-04,node-05,node-06,node-07,node-08,node-09,node-10  # Specific nodes
+#SBATCH --array=1-5                  # Job array with 5 tasks
+#SBATCH --nodelist=node-02,node-03,node-04,node-05,node-06  # Specific nodes
 
 # 5 nodes:
 # --array=1-10                  # Job array with 10 tasks
