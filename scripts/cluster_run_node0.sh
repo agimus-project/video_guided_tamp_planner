@@ -13,8 +13,10 @@
 NODE_NUM=$(echo $SLURM_NODELIST | grep -o '[0-9]\+')
 echo "Node - $SLURM_NODELIST"
 
+echo "Start iter accounting from : $1"
+
 # Compute iteration range
-from_iter=$((2200 + (NODE_NUM - 1) * 130))
+from_iter=$(($1 + (NODE_NUM - 1) * 130))
 to_iter=$((from_iter + 130))
 
 
